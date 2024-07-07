@@ -10,7 +10,6 @@ params = {
 
 let data;
 
-
 async function main(category) {
   const url = `https://newsapi.org/v2/top-headlines?country=${params.country}&category=${category}&pageSize=${params.pageSize}&apiKey=${params.apiKey}`;
   data = await axios.get(url, { params });
@@ -20,11 +19,10 @@ async function main(category) {
   for (let i = 0; i < art.length; i++) {
     const title = art[i]["title"];
 
-    const check = await Articles.findOne({ title: title })
+    const check = await Articles.findOne({ title: title });
     if (check) {
-      continue
-    }
-    else {
+      continue;
+    } else {
       const post = new Articles({
         source: art[i]["source"],
         author: art[i]["author"],
@@ -37,7 +35,6 @@ async function main(category) {
         content: art[i]["content"],
       });
 
-
       post.save((err) => {
         if (err) console.log(err);
       });
@@ -46,7 +43,6 @@ async function main(category) {
 }
 
 const getArticles = async (req, res) => {
-
   const path = req.path;
   let conpath;
   if (path === "/") {
@@ -56,22 +52,17 @@ const getArticles = async (req, res) => {
   }
   await main(conpath);
 
-
   const skip = req.query.skip ? Number(req.query.skip) : 0;
   const DEFAULT_LIMIT = 12;
 
   try {
-  await Articles.deleteMany({ "newsGenre": { $ne: conpath } });
+    await Articles.deleteMany({ newsGenre: { $ne: conpath } });
     const results = await Articles.find().skip(skip).limit(DEFAULT_LIMIT);
     const count = await Articles.countDocuments();
-    res.status(200).json({ size:count,results:results});
+    res.status(200).json({ size: count, results: results });
   } catch (error) {
     res.status(500).json(error);
   }
-
 };
 
-
-
-
-module.exports = {getArticles};
+module.exports = { getArticles };
