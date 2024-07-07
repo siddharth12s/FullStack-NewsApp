@@ -37,6 +37,6 @@ Live at https://fullstack-newsapp.onrender.com
 
 ## Some images of the app
 
-![alt text](/home/siddharth/Desktop/Projects/newsapp/FullStack-NewsApp/images/img1.jpeg)
+![alt text](https://github.com/siddharth12s/FullStack-NewsApp/blob/main/images/img1.jpeg?raw=true)
 
-![alt text](/home/siddharth/Desktop/Projects/newsapp/FullStack-NewsApp/images/img2.jpeg)
+![alt text](https://github.com/siddharth12s/FullStack-NewsApp/blob/main/images/img2.png?raw=true)
